@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noise"
+        android:id="@+id/noiseCheckBox"
+        android:ems="10"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="125dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vibration"
+        android:id="@+id/vibrationCheckBox"
+        android:layout_below="@+id/noiseCheckBox"
+        android:layout_alignLeft="@+id/noiseCheckBox"
+        android:layout_alignStart="@+id/noiseCheckBox"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="270dp">
+
+        <EditText
+            android:id="@+id/atomPay_name"
+            android:layout_width="160dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:hint="var1"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/atomPay_value"
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="var2"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageButton
+            android:id="@+id/atomPay_removePay"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:contentDescription="var3"
+            android:onClick="removeAtomPayOnClickHandler"
+            android:src="@android:drawable/ic_menu_delete" />
+    </LinearLayout>
+
+</RelativeLayout>
