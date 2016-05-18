@@ -26,4 +26,6 @@
     <string name="zAxisLabel">Z Axis:\u0020</string>
     <string name="ratio1">Ratio 1 Enabled</string>
     <string name="copyright">BYU-Idaho\nCopyright &#169; 2016</string>
+    <string name="noise">Noise</string>
+    <string name="vibration">Vibration</string>
 </resources>
