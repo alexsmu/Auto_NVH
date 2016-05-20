@@ -28,4 +28,5 @@
     <string name="copyright">BYU-Idaho\nCopyright &#169; 2016</string>
     <string name="noise">Noise</string>
     <string name="vibration">Vibration</string>
+    <string name="addDevice">Add Device</string>
 </resources>

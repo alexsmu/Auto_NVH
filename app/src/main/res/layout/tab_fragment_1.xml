@@ -1,66 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="MyApplication"
     android:orientation="vertical">
 
-
-    <CheckBox
-        android:layout_width="wrap_content"
+    <ToggleButton
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:text="@string/noise"
-        android:id="@+id/noiseCheckBox"
-        android:ems="18"
+        android:textSize="20sp"
+        android:textOff="@string/noise"
+        android:textOn="@string/noise"
+        android:disabledAlpha="1.2"
+        android:id="@+id/toggleNoise"
+        android:background="@drawable/toggle_selector"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_centerHorizontal="true" />
 
-    <CheckBox
+    <ToggleButton
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textOff="@string/vibration"
+        android:textOn="@string/vibration"
+        android:disabledAlpha="1.2"
+        android:id="@+id/toggleVibration"
+        android:background="@drawable/toggle_selector"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/toggleNoise"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/EnterDeviceInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:listitem="@layout/pulley_device_list_item"
+        android:layout_below="@+id/addDeviceButton">
+    </ListView>
+
+    <Button
+        android:id="@+id/addDeviceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/vibration"
-        android:id="@+id/vibrationCheckBox"
-        android:layout_below="@+id/noiseCheckBox"
-        android:layout_alignLeft="@+id/noiseCheckBox"
-        android:layout_alignStart="@+id/noiseCheckBox"
-        android:layout_marginTop="10dp"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vibrationCheckBox"
-        android:layout_marginLeft="20dp">
-
-        <EditText
-            android:id="@+id/atomPay_name"
-            android:layout_width="160dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:hint="var1"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/atomPay_value"
-            android:layout_width="80dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="numberDecimal"
-            android:text="var2"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <ImageButton
-            android:id="@+id/atomPay_removePay"
-            android:layout_width="40dp"
-            android:layout_height="fill_parent"
-            android:contentDescription="var3"
-            android:onClick="removeAtomPayOnClickHandler"
-            android:src="@android:drawable/ic_menu_delete" />
-    </LinearLayout>
-
+        android:text="@string/addDevice"
+        android:drawableStart="@android:drawable/ic_input_add"
+        android:layout_below="@+id/toggleVibration"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

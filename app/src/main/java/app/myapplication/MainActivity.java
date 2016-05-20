@@ -115,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         switch(item.getItemId()){
-            case R.id.wrench:
-
-                break;
             case R.id.one:
 
                 break;
