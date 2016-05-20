@@ -19,7 +19,6 @@ public class TabFragment2 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setUserVisibleHint(isVisible());
     }
 
     @Override
@@ -31,11 +30,19 @@ public class TabFragment2 extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && mMain != null) {
 
+        // Is fragment currently visible ?
+        if (this.isVisible()) {
+            // Is it becoming invisible?
+            if (!isVisibleToUser) {
+
+            }
         }
-        else {
+        else { // Is fragment currently invisible?
+            // Is it becoming visible?
+            if (isVisibleToUser) {
 
+            }
         }
     }
 }
