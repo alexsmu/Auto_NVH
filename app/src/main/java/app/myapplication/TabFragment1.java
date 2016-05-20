@@ -22,16 +22,17 @@ public class TabFragment1 extends Fragment {
         initList();
         ListView lv = (ListView) mMain.findViewById(R.id.EnterDeviceInfo);
 
-
-
         // This is a simple adapter that accepts as parameter
         // Context
         // Data list
         // The row layout that is used during the row creation
         // The keys used to retrieve the data
         // The View id used to show the data. The key number and the view id must match
-        SimpleAdapter simpleAdpt = new SimpleAdapter(getActivity(), deviceList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
+        SimpleAdapter simpleAdpt = new SimpleAdapter(getActivity(),
+                deviceList, R.layout.pulley_device_list_item,
+                new String[] {"device1", "device2", "device3"}, new int[] {1, 2, 3});
         lv.setAdapter(simpleAdpt);
+
         return mMain;
     }
 
@@ -39,18 +40,20 @@ public class TabFragment1 extends Fragment {
     List<Map<String, Double>> deviceList = new ArrayList<>();
 
     private void initList() {
-        // We populate the planets
 
-        deviceList.add(createDevice("Crankshaft", 1.0));
-        deviceList.add(createDevice("A/C", 2.5));
-
+        deviceList.add(createDevice("device", 1.0));
+        deviceList.add(createDevice("device", 1.0));
+        deviceList.add(createDevice("device", 1.0));
+        deviceList.add(createDevice("device", 1.0));
+        deviceList.add(createDevice("device", 1.0));
+        deviceList.add(createDevice("device", 1.0));
     }
 
     private HashMap<String, Double> createDevice(String name, Double value) {
-        HashMap<String, Double> planet = new HashMap<>();
-        planet.put(name, value);
+        HashMap<String, Double> device = new HashMap<>();
+        device.put(name, value);
 
-        return planet;
+        return device;
     }
 
 

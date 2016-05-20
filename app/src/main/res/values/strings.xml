@@ -29,4 +29,6 @@
     <string name="noise">Noise</string>
     <string name="vibration">Vibration</string>
     <string name="addDevice">Add Device</string>
+    <string name="ratio">Ratio</string>
+    <string name="name">Name</string>
 </resources>
