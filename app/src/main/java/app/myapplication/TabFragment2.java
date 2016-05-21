@@ -5,20 +5,41 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabFragment2 extends Fragment {
     View mMain = null;
     private ToggleButton toggleRealTime, togglePlayBack;
     private TextView textTitle;
+    private Spinner fileSpinner;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mMain = inflater.inflate(R.layout.tab_fragment_2, container, false);
         addListenerToToggleButtons();
+        /*THE FOLLOWING ITEMS ARE FOR TESTING ONLY*/
+        List<String> testFiles = new ArrayList<String>();
+        testFiles.add("BlueCar.txt");
+        testFiles.add("RedCar.txt");
+        testFiles.add("NeonCar.txt");
+        testFiles.add("BlackCar.txt");
+        /*TESTCODE ENDS HERE*/
+
+        fileSpinner = (Spinner) mMain.findViewById(R.id.fileSpinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getActivity().getApplicationContext(), R.layout.file_spinner, testFiles);
+       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fileSpinner.setAdapter(adapter);
         return mMain;
     }
 

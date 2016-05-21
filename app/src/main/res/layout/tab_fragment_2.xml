@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,18 +21,30 @@
         android:textSize="30dp"
         />
 
+    <Spinner
+        android:id="@+id/fileSpinner"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/textTitle"
+        android:layout_centerHorizontal="true"
+        android:spinnerMode="dropdown" />
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/fftGraph"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textTitle"
+        android:layout_below="@+id/fileSpinner"
         />
 
     <ToggleButton
         android:layout_toLeftOf="@+id/CenterImageView"
         android:layout_width="140dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textOff="@string/real_time"
@@ -34,7 +52,7 @@
         android:disabledAlpha="1.2"
         android:id="@+id/toggleRealTime"
         android:background="@drawable/toggle_selector"
-        android:layout_below="@+id/fftGraph"
+        android:layout_below="@+id/fftSeekBar"
         android:checked="true"
         />
 
@@ -64,52 +82,59 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fileUploadButton"
-        android:src="@drawable/file_upload"
+        android:id="@+id/pauseButton"
+        android:background="#0000"
+        android:layout_toLeftOf="@id/CenterImageView"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/pause_image"
         android:layout_alignTop="@+id/playButton"
-        android:layout_toRightOf="@+id/playButton"
-        android:layout_toEndOf="@+id/playButton" />
+         />
 
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
+        android:background="#0000"
+        android:layout_marginRight="10dp"
         android:id="@+id/playButton"
-        android:src="@drawable/play_image"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="77dp"
-        android:layout_below="@+id/fftGraph"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:src="@mipmap/play_image"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/pauseButton"
+        android:layout_below="@+id/toggleRealTime"
+   />
 
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/stop_image"
+        android:src="@mipmap/stop_image"
+        android:background="#0000"
         android:id="@+id/stopButton"
+        android:layout_marginRight="10dp"
         android:layout_alignTop="@+id/playButton"
-        android:layout_toRightOf="@+id/fileUploadButton"
+        android:layout_toRightOf="@+id/CenterImageView"
  />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:src="@mipmap/record_image"
+        android:background="#0000"
         android:id="@+id/button4"
         android:layout_alignTop="@+id/playButton"
-        android:layout_toRightOf="@+id/playButton"
-        android:layout_toEndOf="@+id/playButton" />
+        android:layout_toRightOf="@id/stopButton" />
 
     <SeekBar
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_alignBottom="@+id/toggleRealTime"
-        android:layout_alignLeft="@+id/toggleRealTime"
-        android:layout_alignStart="@+id/toggleRealTime" />
+        android:id="@+id/fftSeekBar"
+        android:layout_below="@+id/fftGraph"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>
+</ScrollView>
