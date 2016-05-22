@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class TabFragment2 extends Fragment {
     private ImageButton playButton,stopButton,pauseButton,recordButton;
     private TextView textTitle;
     private Spinner fileSpinner;
+    private SeekBar fftseekBar;
 
 
     @Override
@@ -29,6 +31,7 @@ public class TabFragment2 extends Fragment {
         mMain = inflater.inflate(R.layout.tab_fragment_2, container, false);
         addListenerToToggleButtons();
         addListenerToImageButtons();
+        addListenerToSeekBar();
         /*THE FOLLOWING ITEMS ARE FOR TESTING ONLY*/
         List<String> testFiles = new ArrayList<String>();
         testFiles.add("BlueCar.txt");
@@ -44,6 +47,37 @@ public class TabFragment2 extends Fragment {
        // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fileSpinner.setAdapter(adapter);
         return mMain;
+    }
+
+    void addListenerToSeekBar() {
+        fftseekBar = (SeekBar) mMain.findViewById(R.id.fftSeekBar);
+
+        fftseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                if(togglePlayBack.isChecked()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Seeking",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "SeekBar disabled during Real Time Session",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     void addListenerToImageButtons() {
@@ -81,7 +115,7 @@ public class TabFragment2 extends Fragment {
                 }
                 else
                 {
-                    Toast.makeText(getActivity().getApplicationContext(), "Stop disabled during Real Time Session",
+                    Toast.makeText(getActivity().getApplicationContext(), "Stop Recording",
                             Toast.LENGTH_SHORT).show();
                 }
             }
