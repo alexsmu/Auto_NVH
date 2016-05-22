@@ -35,4 +35,7 @@
     <string name="real_time">Real Time</string>
     <string name="session">Session</string>
     <string name="playback">Playback</string>
+    <string name="pulley_ratios">Pulley Ratios</string>
+    <string name="crankshaft">Crankshaft</string>
+    <string name="_1_0">1.0</string>
 </resources>

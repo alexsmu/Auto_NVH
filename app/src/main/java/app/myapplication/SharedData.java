@@ -25,7 +25,6 @@ public class SharedData {
         defaultRatios.add("Power steering pulley diameter");
         defaultRatios.add("Tire size");
         ratios = prefs.getStringSet("ratios", defaultRatios);
-
     }
 
     public boolean getBool(String name, boolean def_val){

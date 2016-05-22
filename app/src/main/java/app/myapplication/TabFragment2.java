@@ -44,7 +44,7 @@ public class TabFragment2 extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity().getApplicationContext(), R.layout.file_spinner, testFiles);
-       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fileSpinner.setAdapter(adapter);
         return mMain;
     }
