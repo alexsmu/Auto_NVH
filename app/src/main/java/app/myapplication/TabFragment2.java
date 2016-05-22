@@ -216,9 +216,9 @@ public class TabFragment2 extends Fragment {
             public void onClick(View v) {
                 toggleRealTime.setChecked(true);
                 togglePlayBack.setChecked(false);
-                Toast.makeText(getActivity().getApplicationContext(), "Real Time Session",
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.tab2_title1),
                         Toast.LENGTH_SHORT).show();
-                textTitle.setText("Real Time Session");
+                textTitle.setText(getString(R.string.tab2_title1));
             }
         });
 
@@ -228,9 +228,9 @@ public class TabFragment2 extends Fragment {
             public void onClick(View v) {
                 togglePlayBack.setChecked(true);
                 toggleRealTime.setChecked(false);
-                Toast.makeText(getActivity().getApplicationContext(), "Playback Session",
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.tab2_title2),
                         Toast.LENGTH_SHORT).show();
-                textTitle.setText("Playback Session");
+                textTitle.setText(getString(R.string.tab2_title2));
             }
         });
     }
