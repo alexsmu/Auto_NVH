@@ -21,6 +21,7 @@ public class Xlo {
     public static double[] yAcc;
     public static double[] zAcc;
     public static boolean isRunning = false;
+    public static boolean isEnabled = true;
     private int val = 0;
     private int N = 0;
     private int accum = 1;
@@ -39,32 +40,34 @@ public class Xlo {
     }
 
     public void run() {
-        isRunning = true;
-        Thread fftThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sm.registerListener(xlo_read, accelerometer, 1000);
-                Timer timer = new Timer();
-                TimerTask accumulate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        xAcc[val] = xc;
-                        yAcc[val] = yc;
-                        zAcc[val] = zc;
-                        ++val;
-                        if (val == N / accum) {
-                            Message done = mHandler.obtainMessage(3);
-                            mHandler.sendMessage(done);
+        if (isEnabled) {
+            isRunning = true;
+            Thread fftThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sm.registerListener(xlo_read, accelerometer, 1000);
+                    Timer timer = new Timer();
+                    TimerTask accumulate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            xAcc[val] = xc;
+                            yAcc[val] = yc;
+                            zAcc[val] = zc;
+                            ++val;
+                            if (val == N / accum) {
+                                Message done = mHandler.obtainMessage(3);
+                                mHandler.sendMessage(done);
+                            }
                         }
-                    }
-                };
-                timer.schedule(accumulate, 0, 1);
-                while (isRunning);
-                timer.cancel();
-                sm.unregisterListener(xlo_read, accelerometer);
-            }
-        }, "auto_nvs_fft");
-        fftThread.start();
+                    };
+                    timer.schedule(accumulate, 0, 1);
+                    while (isRunning) ;
+                    timer.cancel();
+                    sm.unregisterListener(xlo_read, accelerometer);
+                }
+            }, "auto_nvs_fft");
+            fftThread.start();
+        }
     }
 
     public void onPause() {
