@@ -1,6 +1,9 @@
 package app.myapplication;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +27,7 @@ public class TabFragment2 extends Fragment {
     private TextView textTitle;
     private Spinner fileSpinner;
     private SeekBar fftseekBar;
-
+    public Handler mHandler = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +49,49 @@ public class TabFragment2 extends Fragment {
                 getActivity().getApplicationContext(), R.layout.file_spinner, testFiles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fileSpinner.setAdapter(adapter);
+
+        mHandler = new Handler(Looper.getMainLooper()) {
+            public void handleMessage(Message msg) {
+                switch(msg.what) {
+                    case 1: // Audio buffer is ready
+                    {
+                        // begin audio fft
+                        break;
+                    }
+                    case 2: // Audio fft is complete
+                    {
+                        // add to series
+                        break;
+                    }
+                    case 3: // Accelerometer data is ready
+                    {
+                        // begin fft
+                        break;
+                    }
+                    case 4: // Accelerometer fft is complete
+                    {
+                        // add to series
+                        break;
+                    }
+                    case 5: // Audio fft correlation complete
+                    {
+                        // add to series
+                        break;
+                    }
+                    case 6: // Accelerometer fft correlation complete
+                    {
+                        //add to series
+                        break;
+                    }
+                    default:
+                    {
+                        super.handleMessage(msg);
+                    }
+                }
+            }
+        };
+
+
         return mMain;
     }
 
