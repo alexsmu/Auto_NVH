@@ -38,4 +38,10 @@
     <string name="pulley_ratios">Pulley Ratios</string>
     <string name="crankshaft">Crankshaft</string>
     <string name="_1_0">1.0</string>
+    <string name="tab2_title1">Real Time Session</string>
+    <string name="tab2_title2">Playback Session</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
+    <string name="record">Record</string>
 </resources>
