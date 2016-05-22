@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -15,10 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Real Time Session"
+        android:text="@string/tab2_title1"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         />
 
     <Spinner
@@ -62,6 +62,7 @@
         android:id="@+id/CenterImageView"
         android:layout_width="10dp"
         android:layout_height="10dp"
+        tools:ignore="contentDescription"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/fftGraph"/>
 
@@ -83,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pauseButton"
+        android:contentDescription="@string/pause"
         android:background="#0000"
         android:layout_toLeftOf="@id/CenterImageView"
         android:layout_marginRight="10dp"
@@ -94,10 +96,10 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
         android:background="#0000"
         android:layout_marginRight="10dp"
         android:id="@+id/playButton"
+        android:contentDescription="@string/start"
         android:src="@mipmap/play_image"
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@id/pauseButton"
@@ -109,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/stop_image"
+        android:contentDescription="@string/stop"
         android:background="#0000"
         android:id="@+id/stopButton"
         android:layout_marginRight="10dp"
@@ -120,6 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/record_image"
+        android:contentDescription="@string/record"
         android:background="#0000"
         android:id="@+id/recordButton"
         android:layout_alignTop="@+id/playButton"
