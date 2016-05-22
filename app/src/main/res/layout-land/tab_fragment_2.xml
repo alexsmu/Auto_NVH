@@ -2,61 +2,138 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="350dp"
-        android:layout_height="match_parent"
-        android:id="@+id/graph"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/graph"
-        android:layout_toEndOf="@+id/graph"
-        android:layout_marginLeft="62dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="98dp" />
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Real Time Session"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        <Spinner
+            android:id="@+id/fileSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:spinnerMode="dropdown"
+            android:layout_above="@+id/toggleRealTime"
+            android:layout_toRightOf="@+id/fftGraph"
+            android:layout_toEndOf="@+id/fftGraph"
+            android:layout_marginRight="20dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button2"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/fftGraph"
+            android:layout_toStartOf="@+id/toggleRealTime"
+            android:layout_toLeftOf="@+id/toggleRealTime"
+            android:layout_marginRight="20dp"
+            android:layout_alignBottom="@+id/CenterImageView" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button4"
-        android:layout_below="@+id/button3"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3" />
+        <ToggleButton
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textOff="@string/real_time"
+            android:textOn="@string/real_time"
+            android:disabledAlpha="1.2"
+            android:id="@+id/toggleRealTime"
+            android:background="@drawable/toggle_selector"
+            android:checked="true"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/pauseButton"
+            android:layout_alignEnd="@+id/pauseButton" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:id="@+id/checkBox"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="49dp" />
+        <!-- THIS IMAGE VIEW IS BEING USED TO CENTER ELEMENTS
+            IN THIS VIEW - DO NOT REMOVE !-->
+        <ImageView
+            android:id="@+id/CenterImageView"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+
+            android:layout_below="@+id/stopButton"
+            android:layout_toRightOf="@+id/textTitle"
+            android:layout_toEndOf="@+id/textTitle" />
+
+        <ToggleButton
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textOff="@string/playback"
+            android:textOn="@string/playback"
+            android:disabledAlpha="1.2"
+            android:id="@+id/togglePlayBack"
+            android:background="@drawable/toggle_selector"
+            android:layout_toRightOf="@+id/CenterImageView"
+            android:layout_alignTop="@+id/toggleRealTime"
+            android:checked="false"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pauseButton"
+            android:background="#0000"
+            android:src="@mipmap/pause_image"
+            android:layout_above="@+id/CenterImageView"
+            android:layout_alignRight="@+id/CenterImageView"
+            android:layout_alignEnd="@+id/CenterImageView"
+            android:layout_marginRight="10dp" />
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:background="#0000"
+            android:layout_marginRight="10dp"
+            android:id="@+id/playButton"
+            android:src="@mipmap/play_image"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/pauseButton"
+            android:layout_below="@+id/toggleRealTime"
+            />
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/stop_image"
+            android:background="#0000"
+            android:id="@+id/stopButton"
+            android:layout_marginRight="10dp"
+            android:layout_alignTop="@+id/playButton"
+            android:layout_toRightOf="@+id/CenterImageView"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/record_image"
+            android:background="#0000"
+            android:id="@+id/recordButton"
+            android:layout_alignTop="@+id/playButton"
+            android:layout_toRightOf="@id/stopButton" />
+
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fftSeekBar"
+            android:indeterminate="false"
+            android:layout_below="@+id/fftGraph"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/fftGraph"
+            android:layout_alignEnd="@+id/fftGraph" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
