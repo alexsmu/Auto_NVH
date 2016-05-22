@@ -3,31 +3,51 @@ package app.myapplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListPopupWindow;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class SharedData {
-    private static SharedPreferences prefs;
-    private static SharedPreferences.Editor editor;
-    private Set<String> defaultRatios;
-    private static Set<String> ratios;
-    private static HashMap<String, Boolean> checkBoxes = new HashMap<String, Boolean>();
-
+    private static SharedPreferences prefs = null;
+    private static SharedPreferences.Editor editor = null;
+    private Set<String> defaultRatios = new HashSet<>();
+    private static Set<String> ratio_names = null;
+    private static Set<String> disabled_ratio_set = new HashSet<>();
+    private static String[] disabled_ratios = null;
+    private static HashMap<String, Boolean> checkBoxes = new HashMap<>();
+    private static HashMap<String, Float> ratios = new HashMap<>();
+    public static Context mContext = null;
+    public static ListPopupWindow dropdown = null;
 
     public SharedData(Context context) {
-        prefs = context.getSharedPreferences(context.getString(R.string.preference_file), Context.MODE_PRIVATE);
+        mContext = context;
+        prefs = mContext.getSharedPreferences(mContext.getString(R.string.preference_file), Context.MODE_PRIVATE);
         editor = prefs.edit();
-        checkBoxes.put("vibration", prefs.getBoolean("vibration", true));
-        checkBoxes.put("noise", prefs.getBoolean("noise", true));
+        checkBoxes.put("vibration", prefs.getBoolean("c_vibration", true));
+        checkBoxes.put("noise", prefs.getBoolean("c_noise", false));
         defaultRatios.add("Differential gear ratio");
         defaultRatios.add("Crankshaft pulley diameter");
         defaultRatios.add("Power steering pulley diameter");
         defaultRatios.add("Tire size");
-        ratios = prefs.getStringSet("ratios", defaultRatios);
+        ratio_names = prefs.getStringSet("ratios", defaultRatios);
+        for (String s : ratio_names) {
+            ratios.put(s, prefs.getFloat("r_" + s, 1));
+            checkBoxes.put(s, prefs.getBoolean("c_" + s, false));
+            if (!checkBoxes.get(s))
+                disabled_ratio_set.add(s);
+        }
+        dropdown = new ListPopupWindow(mContext);
+        disabled_ratios = disabled_ratio_set.toArray(new String[disabled_ratio_set.size()]);
+        dropdown.setAdapter(new ArrayAdapter<>(mContext, R.layout.ratios_dropdown, disabled_ratios));
+        dropdown.setOnItemClickListener(selectRatio);
     }
 
-    public boolean getBool(String name, boolean def_val){
+    public static boolean getBool(String name, boolean def_val){
         if (checkBoxes.containsKey(name))
             return checkBoxes.get(name);
         else
@@ -35,11 +55,32 @@ public class SharedData {
     }
 
     public static void putBool(String name, boolean val) {
-        editor.putBoolean(name, val);
+        editor.putBoolean("c_" + name, val);
         editor.commit();
     }
 
-    public boolean definedCheckBox(String name) {
+    public static float getRatioVal(String name) {
+        if (ratios.containsKey(name))
+            return ratios.get(name);
+        else
+            return 1;
+    }
+
+    public static boolean isRatioEN(String name) {
+        return getBool(name, false);
+    }
+
+    public static void putRatio(String name, float val, boolean EN) {
+        ratios.put(name, val);
+        checkBoxes.put(name, EN);
+        ratio_names.add(name);
+        editor.putFloat("r_" + name, val);
+        editor.putBoolean("c_" + name, EN);
+        editor.putStringSet("ratios", ratio_names);
+        editor.commit();
+    }
+
+    public static boolean definedCheckBox(String name) {
         return checkBoxes.containsKey(name);
     }
 
@@ -48,22 +89,22 @@ public class SharedData {
         putBool(name,val);
     }
 
-    public void setFirstRun(boolean val) {
-        putBool("firstrun", false);
+    public static void setFirstRun(boolean val) {
+        putBool("firstrun", val);
     }
 
-    public boolean isFirstRun() {
+    public static boolean isFirstRun() {
         return prefs.getBoolean("firstrun", false);
     }
 
-    public static void checkBoxListener(int id) {
-
-    }
-
-    private static View.OnClickListener checkVibration = new View.OnClickListener() {
+    public static AdapterView.OnItemClickListener selectRatio = new AdapterView.OnItemClickListener() {
         @Override
-        public void onClick(View view) {
-
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String name = disabled_ratios[position];
+            float val = getRatioVal(name);
+            boolean EN = isRatioEN(name);
+            // MISSING: change corresponding editText & checkBox values
+            dropdown.dismiss();
         }
     };
 
