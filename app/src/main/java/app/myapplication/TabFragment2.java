@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TabFragment2 extends Fragment {
     View mMain = null;
     private ToggleButton toggleRealTime, togglePlayBack;
+    private ImageButton playButton,stopButton,pauseButton,recordButton;
     private TextView textTitle;
     private Spinner fileSpinner;
 
@@ -26,6 +28,7 @@ public class TabFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mMain = inflater.inflate(R.layout.tab_fragment_2, container, false);
         addListenerToToggleButtons();
+        addListenerToImageButtons();
         /*THE FOLLOWING ITEMS ARE FOR TESTING ONLY*/
         List<String> testFiles = new ArrayList<String>();
         testFiles.add("BlueCar.txt");
@@ -41,6 +44,85 @@ public class TabFragment2 extends Fragment {
        // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fileSpinner.setAdapter(adapter);
         return mMain;
+    }
+
+    void addListenerToImageButtons() {
+        playButton = (ImageButton) mMain.findViewById(R.id.playButton);
+        stopButton = (ImageButton) mMain.findViewById(R.id.stopButton);
+        pauseButton = (ImageButton) mMain.findViewById(R.id.pauseButton);
+        recordButton = (ImageButton) mMain.findViewById(R.id.recordButton);
+
+        playButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                if(togglePlayBack.isChecked()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Play",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Play disabled during Real Time Session",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                if(togglePlayBack.isChecked()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Stop",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Stop disabled during Real Time Session",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        pauseButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                if(togglePlayBack.isChecked()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Pause",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Pause disabled during Real Time Session",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        recordButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                if(toggleRealTime.isChecked()){
+                    Toast.makeText(getActivity().getApplicationContext(), "Record",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Record disabled during Playback Session",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
     }
 
     void addListenerToToggleButtons() {
