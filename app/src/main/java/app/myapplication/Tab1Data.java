@@ -26,7 +26,6 @@ public class Tab1Data {
     public Tab1Data(Context context) {
         mContext = context;
         prefs = mContext.getSharedPreferences(mContext.getString(R.string.preference_file), Context.MODE_PRIVATE);
-        editor = prefs.edit();
         checkBoxes.put("vibration", prefs.getBoolean("c_vibration", true));
         checkBoxes.put("noise", prefs.getBoolean("c_noise", false));
         defaultRatios.add("Differential gear ratio");
@@ -55,8 +54,9 @@ public class Tab1Data {
     }
 
     public static void putBool(String name, boolean val) {
+        editor = prefs.edit();
         editor.putBoolean("c_" + name, val);
-        editor.commit();
+        editor.apply();
     }
 
     public static float getRatioVal(String name) {
@@ -75,10 +75,11 @@ public class Tab1Data {
         checkBoxes.put(name, EN);
         ratio_names.add(name);
         update_dropdown(name, EN);
+        editor = prefs.edit();
         editor.putFloat("r_" + name, val);
         editor.putBoolean("c_" + name, EN);
         editor.putStringSet("ratios", ratio_names);
-        editor.commit();
+        editor.apply();
     }
 
     public static void update_dropdown(String name, boolean EN) {
@@ -93,9 +94,11 @@ public class Tab1Data {
             ratios.remove(name);
             checkBoxes.remove(name);
             ratio_names.remove(name);
+            editor = prefs.edit();
             editor.remove("r_" + name);
             editor.remove("c_" + name);
             editor.putStringSet("ratios", ratio_names);
+            editor.apply();
         }
     }
 
@@ -125,8 +128,8 @@ public class Tab1Data {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String name = disabled_ratios[position];
             float val = getRatioVal(name);
-            boolean EN = isRatioEN(name);
-            // MISSING: change corresponding editText & checkBox values
+            boolean EN = false;
+            // MISSING: change corresponding editText
             dropdown.dismiss();
         }
     };
