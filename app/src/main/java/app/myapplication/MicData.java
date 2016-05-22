@@ -17,6 +17,7 @@ public class MicData {
     private static Thread recordingThread = null;
     private static boolean isRecording = false;
     private Context mContext = null;
+    public static boolean isEnabled = false;
     public Handler gHandler = null;
     public Handler mHandler = null;
 
@@ -35,38 +36,37 @@ public class MicData {
         return micBufferData;
     }
 
-    public void stopRecording() {
-        isRecording = false;
-        recorder.stop();
-        recorder.release();
-        recorder = null;
-        recordingThread = null;
-    }
-
-    public void startRecording() {
-        recorder = new AudioRecord(MediaRecorder.AudioSource.MIC, RECORDER_SAMPLERATE,
-                RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSizeInBytes);
-        recorder.startRecording();
-        isRecording = true;
-        recordingThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                short[] buff = new short[buffer];
-                double[] mic_data;
-                while (isRecording) {
-                    recorder.read(buff, 0, buffer);
-                    mic_data = short2double(buff);
-                    Message done = mHandler.obtainMessage(1, mic_data);
-                    mHandler.sendMessage(done);
+    public void run() {
+        if (isEnabled) {
+            isRecording = true;
+            recorder = new AudioRecord(MediaRecorder.AudioSource.MIC, RECORDER_SAMPLERATE,
+                    RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSizeInBytes);
+            recorder.startRecording();
+            isRecording = true;
+            recordingThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    short[] buff = new short[buffer];
+                    double[] mic_data;
+                    while (isRecording) {
+                        recorder.read(buff, 0, buffer);
+                        mic_data = short2double(buff);
+                        Message done = mHandler.obtainMessage(1, mic_data);
+                        mHandler.sendMessage(done);
+                    }
                 }
-            }
-        }, "auto_nvs_recording");
-        recordingThread.start();
+            }, "auto_nvs_recording");
+            recordingThread.start();
+        }
     }
 
     public void onPause() {
+        isRecording = false;
         if (recorder != null) {
-            stopRecording();
+            recorder.stop();
+            recorder.release();
+            recorder = null;
         }
+        recordingThread = null;
     }
 }
