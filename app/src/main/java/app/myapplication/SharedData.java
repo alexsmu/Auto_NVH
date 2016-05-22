@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListPopupWindow;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.HashMap;
 import java.util.HashSet;
