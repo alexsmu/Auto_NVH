@@ -14,7 +14,8 @@ public class Tab1Data {
     private static SharedPreferences prefs = null;
     private static SharedPreferences.Editor editor = null;
     private static Set<String> defaultRatios = new HashSet<>();
-    private static Set<String> ratio_names = null;
+    private static Set<String> ratio_names = new HashSet<>();
+    private static Set<String> temp = null;
     private static Set<String> disabled_ratio_set = new HashSet<>();
     private static String[] disabled_ratios = null;
     private static ArrayAdapter<String> disabled_adapter = null;
@@ -32,8 +33,9 @@ public class Tab1Data {
         defaultRatios.add("Crankshaft pulley diameter");
         defaultRatios.add("Power steering pulley diameter");
         defaultRatios.add("Tire size");
-        ratio_names = prefs.getStringSet("ratios", defaultRatios);
-        for (String s : ratio_names) {
+        temp = prefs.getStringSet("ratios", defaultRatios); // Cannot modify set instance returned by this call
+        for (String s : temp) {
+            ratio_names.add(s);
             ratios.put(s, prefs.getFloat("r_" + s, 1));
             checkBoxes.put(s, prefs.getBoolean("c_" + s, false));
             if (!checkBoxes.get(s))
@@ -71,6 +73,8 @@ public class Tab1Data {
     }
 
     public static void putRatio(String name, float val, boolean EN) {
+        editor.remove("ratios");
+        editor.apply();
         ratios.put(name, val);
         checkBoxes.put(name, EN);
         ratio_names.add(name);
@@ -91,6 +95,8 @@ public class Tab1Data {
 
     public static void removeRatio(String name) {
         if (!isDefaultRatio(name)){
+            editor.remove("ratios");
+            editor.apply();
             ratios.remove(name);
             checkBoxes.remove(name);
             ratio_names.remove(name);
